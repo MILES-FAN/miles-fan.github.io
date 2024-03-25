@@ -1,0 +1,661 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-Hans,ja,en,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/console.png">
+  <link rel="icon" href="/assets/console.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Miles Fan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="制作一个Ragdoll风格人物控制器Ragdoll系统在现代游戏中已经非常常见，而ragdoll式的人物控制器在近几年也颇受欢迎，人类一败涂地中就有这样让角色看起来软乎乎的角色控制器。 最近在做的游戏也想做成这种软乎乎的风格，于是开始了尝试。 使用的素材是unity免费公开的角色unity chan，免费角色配免费动作和完整的碰撞体是完美的测试素材。在场景中添加一个ragdoll，绑定unityc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="制作一个Ragdoll风格人物控制器">
+<meta property="og:url" content="https://miles-fan.github.io/zh-hans/2020/05/21/zh-hans/2020-05-21-%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AARagdoll%E9%A3%8E%E6%A0%BC%E4%BA%BA%E7%89%A9%E6%8E%A7%E5%88%B6%E5%99%A8/index.html">
+<meta property="og:site_name" content="Fan&#39;s Blog">
+<meta property="og:description" content="制作一个Ragdoll风格人物控制器Ragdoll系统在现代游戏中已经非常常见，而ragdoll式的人物控制器在近几年也颇受欢迎，人类一败涂地中就有这样让角色看起来软乎乎的角色控制器。 最近在做的游戏也想做成这种软乎乎的风格，于是开始了尝试。 使用的素材是unity免费公开的角色unity chan，免费角色配免费动作和完整的碰撞体是完美的测试素材。在场景中添加一个ragdoll，绑定unityc">
+<meta property="og:locale">
+<meta property="og:image" content="https://brightgames.top/wp-content/uploads/2020/05/1055581D-C4F2-475B-A9C4-C4BC5EED9D0C.png">
+<meta property="og:image" content="https://brightgames.top/wp-content/uploads/2020/05/620C0CCC-6746-4600-84C4-6728BEDEF1B1.png">
+<meta property="article:published_time" content="2020-05-21T03:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-25T16:26:01.833Z">
+<meta property="article:author" content="Miles Fan">
+<meta property="article:tag" content="zh-hans">
+<meta property="article:tag" content="dev">
+<meta property="article:tag" content="unity">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://brightgames.top/wp-content/uploads/2020/05/1055581D-C4F2-475B-A9C4-C4BC5EED9D0C.png">
+  
+  
+  
+  <title>制作一个Ragdoll风格人物控制器 - Fan&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"miles-fan.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":35,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fan&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>ホーム</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>アーカイブ</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>カテゴリ</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>タグ</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>プロフィール</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/bg.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="制作一个Ragdoll风格人物控制器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-05-21 12:00" pubdate>
+          May 21, 2020 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          510 単語
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          5 分
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">制作一个Ragdoll风格人物控制器</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h3 id="制作一个Ragdoll风格人物控制器"><a href="#制作一个Ragdoll风格人物控制器" class="headerlink" title="制作一个Ragdoll风格人物控制器"></a>制作一个Ragdoll风格人物控制器</h3><p>Ragdoll系统在现代游戏中已经非常常见，而ragdoll式的人物控制器在近几年也颇受欢迎，人类一败涂地中就有这样让角色看起来软乎乎的角色控制器。</p>
+<p>最近在做的游戏也想做成这种软乎乎的风格，于是开始了尝试。</p>
+<p>使用的素材是unity免费公开的角色unity chan，免费角色配免费动作和完整的碰撞体是完美的测试素材。在场景中添加一个ragdoll，绑定unitychan的骨骼，准备工作就完成了。</p>
+<p><video src="https://cdn.brightgames.top/wp-content/uploads/2020/05/ragdollplayer-1.mp4" controls="controls" width="100%" height="100%"></video></p>
+<p>但是仅仅这样unity酱是站不起来的，ragdoll状态下的角色没有控制只是瘫倒在地而已。所以要添加configurable joints ，将Angular X Drive和Angular YZ Drive的Spring和Damper属性调大，我填了1000和300，这个属性可以帮助角色直立。</p>
+<p><a target="_blank" rel="noopener" href="https://brightgames.top/wp-content/uploads/2020/05/1055581D-C4F2-475B-A9C4-C4BC5EED9D0C.png" title="configurable joints" class="gallery-item"><img src="https://brightgames.top/wp-content/uploads/2020/05/1055581D-C4F2-475B-A9C4-C4BC5EED9D0C.png" srcset="/img/loading.gif" lazyload alt="configurable joints"></a></p>
+<p><video src="https://cdn.brightgames.top/wp-content/uploads/2020/05/ragdollplayer-2.mp4" controls="controls" width="100%" height="100%"></video></p>
+<p>可以看出Unitychan直接站立后就如被气球吊起一般，无法正常站立，排查后发现是因为角色的小腿只有capsule形状的collider，接触地面的面积不够，给角色脚上增加了box Collider后问题解决。</p>
+<p><a target="_blank" rel="noopener" href="https://brightgames.top/wp-content/uploads/2020/05/620C0CCC-6746-4600-84C4-6728BEDEF1B1.png" title="box collider" class="gallery-item"><img src="https://brightgames.top/wp-content/uploads/2020/05/620C0CCC-6746-4600-84C4-6728BEDEF1B1.png" srcset="/img/loading.gif" lazyload alt="box collider"></a></p>
+<p><video src="https://cdn.brightgames.top/wp-content/uploads/2020/05/ragdollplayer-3.mp4" controls="controls" width="100%" height="100%"></video></p>
+<div style="text-align: center;">
+    一个bug，最后通过减小configurable joints 的angular drive的damper解决
+</div>
+
+<p>角色动画控制方面需要点小技巧，因为ragdoll不能直接套用animator，所以要用一个标准的角色模型作为参考，将animator放置于没有设置rigidbody的模型上，使用我写的targetJoint.cs连接ragdoll角色的骨骼与动画控制角色的骨骼，因为人的关节活动受限，所以只模拟rotation就能够很好的同步动作。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TargetJoint</span> : <span class="hljs-title">MonoBehaviour</span><br>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> strength = <span class="hljs-number">10</span>;<br>    <span class="hljs-keyword">public</span> Transform targetTransform;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">FixedUpdate</span>()</span><br>    &#123;<br>        Rigidbody body=GetComponent&lt;Rigidbody&gt;();<br>        <span class="hljs-built_in">float</span> lerpValue = Time.fixedDeltaTime * strength;<br>        <span class="hljs-comment">//Vector3 targetPosition = Vector3.Lerp(body.position, targetTransform.position, lerpValue);</span><br>        <span class="hljs-comment">//body.MovePosition(targetPosition);</span><br>        Quaternion targetRotation = Quaternion.Lerp(body.rotation, targetTransform.rotation, lerpValue);<br>        body.MoveRotation(targetRotation);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><video src="https://cdn.brightgames.top/wp-content/uploads/2020/05/ragdollplayer-4.mp4" controls="controls" width="100%" height="100%"></video></p>
+<p><video src="https://cdn.brightgames.top/wp-content/uploads/2020/05/ragdollplayer-5.mp4" controls="controls" width="100%" height="100%"></video></p>
+<p>这样就完成了一个简单的ragdoll风格的人物控制器，可以在游戏中使用了。</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://youtu.be/u661TmGPbok">https://youtu.be/u661TmGPbok</a> Making a ragdoll game in unity | my unity journey</p>
+<p><a target="_blank" rel="noopener" href="https://youtu.be/MElbAwhMvTc">https://youtu.be/MElbAwhMvTc</a> Fixed, Spring, Hinge, Character &amp; Configurable Joint explained – Unity Tutorial</p>
+<p><a target="_blank" rel="noopener" href="https://youtu.be/sjRE4qW_giU">https://youtu.be/sjRE4qW_giU</a> how to Balance Active Ragdoll Unity 3d in 1 line of code tutorial</p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/zh-hans/" class="print-no-link">#zh-hans</a>
+      
+        <a href="/tags/dev/" class="print-no-link">#dev</a>
+      
+        <a href="/tags/unity/" class="print-no-link">#unity</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>制作一个Ragdoll风格人物控制器</div>
+      <div>https://miles-fan.github.io/zh-hans/2020/05/21/zh-hans/2020-05-21-制作一个Ragdoll风格人物控制器/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>著者</div>
+          <div>Miles Fan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>作成日</div>
+          <div>May 21, 2020</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>著作権</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/zh-hans/2020/08/16/zh-hans/2020-08-16-Unity%E5%88%B6%E4%BD%9C%E6%B8%B8%E6%88%8F%E2%80%94%E2%80%94CIGA%20Game%20Jam%202020%E4%BD%9C%E5%93%81%E3%80%8A%E6%9E%81%E5%BA%A6%E6%84%A4%E6%80%92%E8%9A%82%E8%9A%81%E3%80%8B/" title="Unity制作游戏——CIGA Game Jam 2020作品《极度愤怒蚂蚁》">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Unity制作游戏——CIGA Game Jam 2020作品《极度愤怒蚂蚁》</span>
+                        <span class="visible-mobile">前の記事</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/zh-hans/2020/05/20/zh-hans/2020-05-20-%E6%8A%8A%E5%9B%BE%E7%89%87%E9%92%89%E5%9C%A8%E5%B1%8F%E5%B9%95%E4%B8%8A%E2%80%94%E2%80%94%E4%B8%BA%E4%BA%86%E6%96%B9%E4%BE%BF%E5%8F%82%E8%80%83%E7%B4%A0%E6%9D%90%EF%BC%8C%E5%86%99%E4%BA%86%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="把图片钉在屏幕上——为了方便参考素材，写了一个小工具">
+                        <span class="hidden-mobile">把图片钉在屏幕上——为了方便参考素材，写了一个小工具</span>
+                        <span class="visible-mobile">次の記事</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>見出し</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">検索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">キーワード</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">ブログは JavaScript を有効にすると最適に機能します</div>
+  </noscript>
+</body>
+</html>
