@@ -104,7 +104,10 @@ theme: archer
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: 'git'
+  repo: 'https://github.com/MILES-FAN/miles-fan.github.io'
+  branch: 'main'
+  message: 'Site updated: {{ now("YYYY-MM-DD HH:mm:ss") }}'
 
 jsonContent:
   meta: true
