@@ -1,7 +1,10 @@
 ---
 title: Unity制作游戏——GGJ2020作品《SYSTEMERROR》
 date: 2020-03-16 12:00:00
-tags: zh-hans dev gamejam
+tags: 
+    - zh-hans
+    - dev
+    - gamejam
 lang: zh-hans
 ---
 

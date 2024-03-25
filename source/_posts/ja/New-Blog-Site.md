@@ -1,7 +1,9 @@
 ---
 title: 3年ぶりのブログ更新
 date: 2024-03-25 17:49:46
-tags: ja
+tags: 
+    - ja
+    - notice
 lang: ja
 ---
 

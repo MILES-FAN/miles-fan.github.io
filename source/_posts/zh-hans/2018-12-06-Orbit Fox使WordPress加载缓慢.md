@@ -1,7 +1,10 @@
 ---
 title: Orbit Fox使WordPress加载缓慢
 date: 2018-12-06 12:00:00
-tags: zh-hans dev
+tags:
+    - zh-hans
+    - dev
+    - wordpress
 lang: zh-hans
 ---
 
