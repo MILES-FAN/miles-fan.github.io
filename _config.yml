@@ -133,3 +133,17 @@ tag_generator:
   per_page: 10
   order_by: -date
   enable_index_page: true
+
+lightgallery:
+    # if you don't specify the css or js source, the default cdn will be used.
+    # css: # css source url
+    # js: #js source url
+    # sorry that I can not find any cdn hosting following plugins,
+    # please self-host the plugin js and add url here
+    # plugins:
+        # lg-thumbnail:
+        # lg-zoom:
+        # lg-autoplay:
+        # lg-fullscreen:
+        # lg-pager:
+  
