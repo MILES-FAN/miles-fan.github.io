@@ -5,6 +5,8 @@ tags:
     - zh-hans
     - dev
     - gamejam
+categories:
+    - 日本語記事
 lang: zh-hans
 ---
 

@@ -4,6 +4,8 @@ date: 2024-03-25 17:49:46
 tags: 
     - ja
     - notice
+categories:
+    - 日本語記事
 lang: ja
 ---
 

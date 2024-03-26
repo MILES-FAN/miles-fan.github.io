@@ -5,6 +5,8 @@ tags:
     - ja
     - dev
     - unity
+categories:
+    - 日本語記事
 lang: ja
 ---
 
