@@ -28,9 +28,9 @@
 <meta property="article:published_time" content="2020-05-21T03:00:00.000Z">
 <meta property="article:modified_time" content="2024-03-26T06:15:50.714Z">
 <meta property="article:author" content="Miles Fan">
-<meta property="article:tag" content="ja">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="unity">
+<meta property="article:tag" content="ja">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://brightgames.top/wp-content/uploads/2020/05/1055581D-C4F2-475B-A9C4-C4BC5EED9D0C.png">
   
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          322 単語
+          309 単語
         
       </span>
     
@@ -278,7 +278,7 @@
             
               <div class="markdown-body">
                 
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="ラグドール風キャラクターコントローラーの制作"><a href="#ラグドール風キャラクターコントローラーの制作" class="headerlink" title="ラグドール風キャラクターコントローラーの制作"></a>ラグドール風キャラクターコントローラーの制作</h2><h3 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h3><p>ラグドール物理は現代ゲームで広く利用されており、近年ではラグドール風キャラクターコントローラーも人気を集めています。</p>
+                <h2 id="ラグドール風キャラクターコントローラーの制作"><a href="#ラグドール風キャラクターコントローラーの制作" class="headerlink" title="ラグドール風キャラクターコントローラーの制作"></a>ラグドール風キャラクターコントローラーの制作</h2><h3 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h3><p>ラグドール物理は現代ゲームで広く利用されており、近年ではラグドール風キャラクターコントローラーも人気を集めています。</p>
 <p>今回、私もゲーム開発でそのようなキャラクターコントローラーを実装したため、制作過程とポイントを共有したいと思います。</p>
 <h3 id="セットアップ"><a href="#セットアップ" class="headerlink" title="セットアップ"></a>セットアップ</h3><p>まず、Unity公式キャラクターであるUnityちゃんを素材として使用します。無料のキャラクターモデル、モーション、コライダーが揃っており、テストに最適です。</p>
 <p>シーンにRagdollコンポーネントを追加し、Unityちゃんのボーンにバインドします。</p>
@@ -286,10 +286,10 @@
 <h3 id="物理調整"><a href="#物理調整" class="headerlink" title="物理調整"></a>物理調整</h3><p>このままでは、Ragdoll状態のキャラクターは自立できません。そこで、Configurable Jointを使用して物理挙動を調整します。</p>
 <h4 id="1-Angular-Driveの調整"><a href="#1-Angular-Driveの調整" class="headerlink" title="1. Angular Driveの調整"></a>1. Angular Driveの調整</h4><p>Angular X DriveとAngular YZ DriveのSpringとDamper属性を調整することで、キャラクターを立たせることができます。</p>
 <p>Spring: バネの強さ。値を大きくすると、より強く立ち上がります。<br>Damper: バネの減衰。値を大きくすると、揺れを抑えられます。</p>
-<p><a target="_blank" rel="noopener" href="https://brightgames.top/wp-content/uploads/2020/05/1055581D-C4F2-475B-A9C4-C4BC5EED9D0C.png" title="configurable joints" class="gallery-item"><img src="https://brightgames.top/wp-content/uploads/2020/05/1055581D-C4F2-475B-A9C4-C4BC5EED9D0C.png" srcset="/img/loading.gif" lazyload alt="configurable joints"></a></p>
+<p><img src="https://brightgames.top/wp-content/uploads/2020/05/1055581D-C4F2-475B-A9C4-C4BC5EED9D0C.png" srcset="/img/loading.gif" lazyload alt="configurable joints"></p>
 <p><video src="https://cdn.brightgames.top/wp-content/uploads/2020/05/ragdollplayer-2.mp4" controls="controls" width="100%" height="100%"></video></p>
 <h4 id="2-コライダーの調整"><a href="#2-コライダーの調整" class="headerlink" title="2. コライダーの調整"></a>2. コライダーの調整</h4><p>デフォルトのカプセルコライダーでは接地面積が小さいため、足元にBox Colliderを追加することで安定性を向上させます。</p>
-<p><a target="_blank" rel="noopener" href="https://brightgames.top/wp-content/uploads/2020/05/620C0CCC-6746-4600-84C4-6728BEDEF1B1.png" title="box collider" class="gallery-item"><img src="https://brightgames.top/wp-content/uploads/2020/05/620C0CCC-6746-4600-84C4-6728BEDEF1B1.png" srcset="/img/loading.gif" lazyload alt="box collider"></a></p>
+<p><img src="https://brightgames.top/wp-content/uploads/2020/05/620C0CCC-6746-4600-84C4-6728BEDEF1B1.png" srcset="/img/loading.gif" lazyload alt="box collider"></p>
 <p><video src="https://cdn.brightgames.top/wp-content/uploads/2020/05/ragdollplayer-3.mp4" controls="controls" width="100%" height="100%"></video></p>
 <div style="text-align: center;">
     バグだ！最終的にconfigurable jointsのangular driveのdamperを減らして解決しました
@@ -314,12 +314,7 @@
 <li><p>Configurable Joints: <a target="_blank" rel="noopener" href="https://docs.unity3d.com/ScriptReference/ConfigurableJoint.html">https://docs.unity3d.com/ScriptReference/ConfigurableJoint.html</a></p>
 </li>
 </ul>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>
+
                 
               </div>
             
@@ -352,11 +347,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/ja/" class="print-no-link">#ja</a>
-      
         <a href="/tags/dev/" class="print-no-link">#dev</a>
       
         <a href="/tags/unity/" class="print-no-link">#unity</a>
+      
+        <a href="/tags/ja/" class="print-no-link">#ja</a>
       
     </div>
   
@@ -413,9 +408,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/zh-hans/2020/08/16/zh-hans/2020-08-16-Unity%E5%88%B6%E4%BD%9C%E6%B8%B8%E6%88%8F%E2%80%94%E2%80%94CIGA%20Game%20Jam%202020%E4%BD%9C%E5%93%81%E3%80%8A%E6%9E%81%E5%BA%A6%E6%84%A4%E6%80%92%E8%9A%82%E8%9A%81%E3%80%8B/" title="Unity制作游戏——CIGA Game Jam 2020作品《极度愤怒蚂蚁》">
+                      <a href="/zh-hans/2020/05/21/zh-hans/2020-05-21-%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AARagdoll%E9%A3%8E%E6%A0%BC%E4%BA%BA%E7%89%A9%E6%8E%A7%E5%88%B6%E5%99%A8/" title="制作一个Ragdoll风格人物控制器">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Unity制作游戏——CIGA Game Jam 2020作品《极度愤怒蚂蚁》</span>
+                        <span class="hidden-mobile">制作一个Ragdoll风格人物控制器</span>
                         <span class="visible-mobile">前の記事</span>
                       </a>
                     
@@ -423,8 +418,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/zh-hans/2020/05/21/zh-hans/2020-05-21-%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AARagdoll%E9%A3%8E%E6%A0%BC%E4%BA%BA%E7%89%A9%E6%8E%A7%E5%88%B6%E5%99%A8/" title="制作一个Ragdoll风格人物控制器">
-                        <span class="hidden-mobile">制作一个Ragdoll风格人物控制器</span>
+                      <a href="/zh-hans/2020/05/20/zh-hans/2020-05-20-%E6%8A%8A%E5%9B%BE%E7%89%87%E9%92%89%E5%9C%A8%E5%B1%8F%E5%B9%95%E4%B8%8A%E2%80%94%E2%80%94%E4%B8%BA%E4%BA%86%E6%96%B9%E4%BE%BF%E5%8F%82%E8%80%83%E7%B4%A0%E6%9D%90%EF%BC%8C%E5%86%99%E4%BA%86%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="把图片钉在屏幕上——为了方便参考素材，写了一个小工具">
+                        <span class="hidden-mobile">把图片钉在屏幕上——为了方便参考素材，写了一个小工具</span>
                         <span class="visible-mobile">次の記事</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
