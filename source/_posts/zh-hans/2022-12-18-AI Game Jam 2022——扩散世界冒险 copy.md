@@ -7,6 +7,8 @@ tags:
     - gamejam
     - unity
     - ai
+categories:
+    - 中文文章
 lang: zh-hans
 ---
 

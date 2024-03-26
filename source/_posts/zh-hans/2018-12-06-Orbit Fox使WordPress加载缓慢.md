@@ -5,6 +5,8 @@ tags:
     - zh-hans
     - dev
     - wordpress
+categories:
+    - 中文文章
 lang: zh-hans
 ---
 
