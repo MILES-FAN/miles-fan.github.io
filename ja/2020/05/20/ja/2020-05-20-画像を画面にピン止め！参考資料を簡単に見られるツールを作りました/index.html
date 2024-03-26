@@ -1,0 +1,662 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-Hans,ja,en,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/console.png">
+  <link rel="icon" href="/assets/console.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Miles Fan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="画像を画面にピン止め！参考資料を簡単に見られるツールを作りましたゲーム開発コンペの企画書作成中、参考資料を簡単に参照するために、画像を画面にピン止めできる小ツールを作成しました。 このツールでは、クリップボードから画像を貼り付けたり、ローカルファイルから画像を開いたりすることができます。画像を小さなウィンドウとして表示し、画面上の好きな場所に配置できるので、他のソフトウェアで作業しながら参照するの">
+<meta property="og:type" content="article">
+<meta property="og:title" content="画像を画面にピン止め！参考資料を簡単に見られるツールを作りました">
+<meta property="og:url" content="https://miles-fan.github.io/ja/2020/05/20/ja/2020-05-20-%E7%94%BB%E5%83%8F%E3%82%92%E7%94%BB%E9%9D%A2%E3%81%AB%E3%83%94%E3%83%B3%E6%AD%A2%E3%82%81%EF%BC%81%E5%8F%82%E8%80%83%E8%B3%87%E6%96%99%E3%82%92%E7%B0%A1%E5%8D%98%E3%81%AB%E8%A6%8B%E3%82%89%E3%82%8C%E3%82%8B%E3%83%84%E3%83%BC%E3%83%AB%E3%82%92%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F/index.html">
+<meta property="og:site_name" content="Fan&#39;s Blog">
+<meta property="og:description" content="画像を画面にピン止め！参考資料を簡単に見られるツールを作りましたゲーム開発コンペの企画書作成中、参考資料を簡単に参照するために、画像を画面にピン止めできる小ツールを作成しました。 このツールでは、クリップボードから画像を貼り付けたり、ローカルファイルから画像を開いたりすることができます。画像を小さなウィンドウとして表示し、画面上の好きな場所に配置できるので、他のソフトウェアで作業しながら参照するの">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://cdn.brightgames.top/wp-content/uploads/2020/05/TIM%E6%88%AA%E5%9B%BE20200520204114.png">
+<meta property="og:image" content="https://cdn.brightgames.top/wp-content/uploads/2020/05/TIM%E6%88%AA%E5%9B%BE20200520203731.png">
+<meta property="article:published_time" content="2020-05-20T03:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-26T06:05:54.379Z">
+<meta property="article:author" content="Miles Fan">
+<meta property="article:tag" content="ja">
+<meta property="article:tag" content="dev">
+<meta property="article:tag" content="tool">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.brightgames.top/wp-content/uploads/2020/05/TIM%E6%88%AA%E5%9B%BE20200520204114.png">
+  
+  
+  
+  <title>画像を画面にピン止め！参考資料を簡単に見られるツールを作りました - Fan&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"miles-fan.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":35,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fan&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>ホーム</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>アーカイブ</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>カテゴリ</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>タグ</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>プロフィール</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/bg.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="画像を画面にピン止め！参考資料を簡単に見られるツールを作りました"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-05-20 12:00" pubdate>
+          2020年5月20日 午後
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          178 単語
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          2 分
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">画像を画面にピン止め！参考資料を簡単に見られるツールを作りました</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="画像を画面にピン止め！参考資料を簡単に見られるツールを作りました"><a href="#画像を画面にピン止め！参考資料を簡単に見られるツールを作りました" class="headerlink" title="画像を画面にピン止め！参考資料を簡単に見られるツールを作りました"></a>画像を画面にピン止め！参考資料を簡単に見られるツールを作りました</h2><p>ゲーム開発コンペの企画書作成中、参考資料を簡単に参照するために、画像を画面にピン止めできる小ツールを作成しました。</p>
+<p>このツールでは、クリップボードから画像を貼り付けたり、ローカルファイルから画像を開いたりすることができます。画像を小さなウィンドウとして表示し、画面上の好きな場所に配置できるので、他のソフトウェアで作業しながら参照するのに便利です。</p>
+<h3 id="機能"><a href="#機能" class="headerlink" title="機能"></a>機能</h3><ul>
+<li>画像をクリップボードから貼り付けたり、ローカルファイルから開いたりできます。</li>
+<li>画像を小さなウィンドウとして表示し、画面上の好きな場所に配置できます。</li>
+<li>ウィンドウのサイズと位置を自由に変更できます。</li>
+<li>画像を常に最前面に表示する設定があります。</li>
+<li>画像を透過させる設定があります。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://cdn.brightgames.top/wp-content/uploads/2020/05/TIM%E6%88%AA%E5%9B%BE20200520204114.png" title="screenshot" class="gallery-item"><img src="https://cdn.brightgames.top/wp-content/uploads/2020/05/TIM%E6%88%AA%E5%9B%BE20200520204114.png" srcset="/img/loading.gif" lazyload alt="screenshot"></a></p>
+<div style="text-align: center;">
+ウィンドウのサイズと位置を自由に変更できます。
+</div>
+
+<p><a target="_blank" rel="noopener" href="https://cdn.brightgames.top/wp-content/uploads/2020/05/TIM%E6%88%AA%E5%9B%BE20200520203731.png" title="screenshot" class="gallery-item"><img src="https://cdn.brightgames.top/wp-content/uploads/2020/05/TIM%E6%88%AA%E5%9B%BE20200520203731.png" srcset="/img/loading.gif" lazyload alt="screenshot"></a></p>
+<div style="text-align: center;">
+ゲーム開発やイラスト制作などの資料を画面にピン止めして参照しています。
+</div>
+
+
+<h3 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h3><p>このツールは、よく役に立っています。</p>
+<video controls="controls" width="100%" height="100%">
+    <source src="https://cdn.brightgames.top/md/1074_0bc3u75egfarmmaecvvcmvqchjyein4bd4sa.f0.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video></div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ja/" class="print-no-link">#ja</a>
+      
+        <a href="/tags/dev/" class="print-no-link">#dev</a>
+      
+        <a href="/tags/tool/" class="print-no-link">#tool</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>画像を画面にピン止め！参考資料を簡単に見られるツールを作りました</div>
+      <div>https://miles-fan.github.io/ja/2020/05/20/ja/2020-05-20-画像を画面にピン止め！参考資料を簡単に見られるツールを作りました/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>著者</div>
+          <div>Miles Fan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>作成日</div>
+          <div>2020年5月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>著作権</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/zh-hans/2020/05/21/zh-hans/2020-05-21-%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AARagdoll%E9%A3%8E%E6%A0%BC%E4%BA%BA%E7%89%A9%E6%8E%A7%E5%88%B6%E5%99%A8/" title="制作一个Ragdoll风格人物控制器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">制作一个Ragdoll风格人物控制器</span>
+                        <span class="visible-mobile">前の記事</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/zh-hans/2020/05/20/zh-hans/2020-05-20-%E6%8A%8A%E5%9B%BE%E7%89%87%E9%92%89%E5%9C%A8%E5%B1%8F%E5%B9%95%E4%B8%8A%E2%80%94%E2%80%94%E4%B8%BA%E4%BA%86%E6%96%B9%E4%BE%BF%E5%8F%82%E8%80%83%E7%B4%A0%E6%9D%90%EF%BC%8C%E5%86%99%E4%BA%86%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="把图片钉在屏幕上——为了方便参考素材，写了一个小工具">
+                        <span class="hidden-mobile">把图片钉在屏幕上——为了方便参考素材，写了一个小工具</span>
+                        <span class="visible-mobile">次の記事</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>見出し</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">検索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">キーワード</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">ブログは JavaScript を有効にすると最適に機能します</div>
+  </noscript>
+</body>
+</html>
